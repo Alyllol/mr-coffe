@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-------NAMEEEE-->
+    <title>MR COFFEE</title>
+    <!---------CSS-->
+    <link rel="stylesheet" href="style.css">
+    <!---------FAVICON-->
+    <link rel="icon" href="images/fav-icon.png">
+    <!-------fonttttttt-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes popScale {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes buttonPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.95); }
+            100% { transform: scale(1); }
+        }
+
+        .product-box {
+            transition: transform 0.3s ease;
+        }
+
+        .product-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-cart-btn {
+            transition: background-color 0.3s ease;
+        }
+
+        .product-cart-btn:hover {
+            background-color: #333;
+            color: white;
+        }
+
+        .nav-cart span {
+            display: inline-block;
+        }
+
+        .nav-cart {
+            position: relative;
+        }
+
+        .nav-cart span {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            background: linear-gradient(45deg, #b36c02, #d68303);
+            color: white;
+            font-size: 13px;
+            min-width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(179, 108, 2, 0.3);
+            border: 2px solid white;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cart:hover span {
+            transform: scale(1.1);
+            box-shadow: 0 3px 8px rgba(179, 108, 2, 0.4);
+        }
+
+        @keyframes popScale {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* Enhanced animations and effects */
+        :root {
+            --primary-color: #9c8461;
+            --secondary-color: #b09877;
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Product box enhancements */
+        .product-box {
+            transform: translateY(0);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .product-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(179, 108, 2, 0.2);
+        }
+
+        .product-box-img {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-box-img img {
+            transition: transform 0.5s ease;
+        }
+
+        .product-box:hover .product-box-img img {
+            transform: scale(1.1);
+        }
+
+        .product-box-img span {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            transform: translateX(-100%);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .product-box:hover .product-box-img span {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        /* Enhanced button styles */
+        .product-cart-btn {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-cart-btn:hover {
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(156, 132, 97, 0.3);
+        }
+
+        .product-cart-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .product-cart-btn:active::after {
+            width: 200px;
+            height: 200px;
+            opacity: 0;
+        }
+
+        /* Price tag animation */
+        .product-box-text span {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .product-box:hover .product-box-text span {
+            transform: scale(1.1);
+            color: var(--primary-color);
+        }
+
+        /* Banner enhancements */
+        .popular-banner, .shopping-banner {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .popular-banner::before, .shopping-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(179, 108, 2, 0.2), rgba(214, 131, 3, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .popular-banner:hover::before, .shopping-banner:hover::before {
+            opacity: 1;
+        }
+
+        /* Text animations */
+        .main-content-text h1,
+        .main-content-text h3,
+        .main-content-text strong {
+            transition: transform 0.3s ease;
+        }
+
+        .main-content-text:hover h1 {
+            transform: translateX(10px);
+        }
+
+        .main-content-text:hover h3 {
+            transform: translateX(5px);
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(156, 132, 97, 0.3);
+        }
+
+        .scroll-top.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-top:hover {
+            background: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+
+        .cart-preview {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 350px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-preview.active {
+            right: 0;
+        }
+
+        .cart-preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #6c443b;
+        }
+
+        .cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 15px 0;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .cart-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-title {
+            font-weight: bold;
+            color: #6c443b;
+        }
+
+        .cart-item-price {
+            color: #9c8461;
+        }
+
+        .cart-item-remove {
+            color: #ff4444;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .cart-preview-footer {
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .cart-total {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #6c443b;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, #6c443b, #9c8461);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 68, 59, 0.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+    </style>
+
+</head>
+<body>
+    <!----MAIN-->
+    <section id="main">
+
+              <!---header-->
+              <header>
+                <!--------NAVIGATION-->
+                <nav class="navigation">
+                    <!-----menu-btn-->
+                    <input type="checkbox" id="menu-btn" class="menu-btn"/>
+                    <label for="menu-btn" class="menu-icon"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height="1em"  width="1em"><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
+                    </label>
+
+                     <!-------mwnu-->
+                     <div class="side-menu">
+                        <div class="menu-container">
+                            <strong>Main Links</strong>
+                            <!-----close btn-->
+                            <label for="menu-btn" class="close-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"  height="1em"  width="1em"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+                            </label>
+                            <!---------menu list-->
+                            <ul class="menu">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Shop</a></li>
+                                <li><a href="#">Popilar</a></li>
+                                <li><a href="#">New</a></li>
+                                <li><a href="#">Recent</a></li>
+                            </ul>
+                        </div>
+                     </div>
+
+                    <!--------LOGO-------------------->
+                    <a href="#" class="logo">
+                        <img src="images/logo.png" alt="logo"/>
+                    </a>
+                    <!----------nav-btns-->
+                    <div class="nav-btns">
+                        <!------search-->
+                        <a href="javascript:void(0);" class="nav-search">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" ><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+                        </a>
+                        <!-----------user-->
+                        <a href="javascript:void(0);" class="nav-user">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height="1em"  width="1em" ><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+                        </a>
+                        <!------cart-->
+                        <a href="#" class="nav-cart">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height="1em"  width="1em"><path d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64l0 48-128 0 0-48zm-48 48l-64 0c-26.5 0-48 21.5-48 48L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-208c0-26.5-21.5-48-48-48l-64 0 0-48C336 50.1 285.9 0 224 0S112 50.1 112 112l0 48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"/></svg>
+                            <span>0</span>
+                        </a>
+                    </div>
+                </nav>
+              </header>
+              <!-------main contwnt-->
+              <div class="main-content">
+                <div class="main-content-text">
+                   <strong>Coffee</strong>
+                   <h1>Enjoy <br>Your Morning <br>With Our Coffee</h1>
+                   <h3>Embrace the magic of each morning with a cup of coffee that awakens your senses and ignites your passion.</h3>
+                   <span>$10.50</span>
+                   <a href="#">Add to cart</a>
+                </div>
+                <div class="main-content-img">
+                    <img src="images/model.png" alt="model"/>
+                        
+                </div>
+              </div>
+
+    </section>
+    <!-----------------------------search-->
+    <div class="search-bar">
+        <form class="search-input">
+            <input type="text" name="search" placeholder="Search For Product"/>
+            <a href="javascript:void(0)" class="search-cancel">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"  height="1em"  width="1em"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+            </a>
+        </form>
+    </div>
+    <!-----login-->
+    <div class="form">
+    <div class="login-form">
+        <a href="javascript:void(0);" class="form-cancel">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"  height="1em"  width="1em"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+        </a>
+        <!-------------------------heading-->
+        <strong>Log In</strong>
+        <!------input-->
+        <form>
+            <input type="email" name="email" placeholder="Example@gmail.com" required/>
+            <input type="password" name="password" placeholder="password" required/>
+            <input type="submit" value="Log In">
+        </form>
+        <!-------btns-->
+        <div class="form-btns">
+            <a href="#" class="forget">Forget Your Password?</a>
+            <a href="javascript:void(0);" class="sign-up-btn">Create An Account?</a>
+             
+        </div>
+    </div>
+
+    <div class="sign-up-form">
+    <a href="javascript:void(0);" class="form-cancel">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"  height="1em"  width="1em"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+    </a>
+    <!-------------------------heading-->
+    <strong>Sign Up</strong>
+    <!------input-->
+    <form>
+        <input type="text" name="Full name" placeholder="Full name" required/>
+        <input type="email" name="email" placeholder="Example@gmail.com" required/>
+        <input type="password" name="password" placeholder="password" required/>
+        <input type="submit" value="Sign Up">
+    </form>
+    <!-------btns-->
+    <div class="form-btns">
+        
+        <a href="javascript:void(0);" class="Already Have An Account?">Create An Account?</a>
+         
+    </div>
+</div>
+
+</div>
+
+<!---------------------popular-->
+<section id="popular">
+    <h2>Popular Coffee</h2>
+
+      <div class="popular-container">
+        <div class="popular-product-container">
+            <!-------box1-->
+           <div class="product-box">
+            <a href="#" class="product-box-img">
+              <img src="images/p1.png" alt="product"/>
+              <span>New</span>
+            </a>
+            <div class="product-box-text">
+                 <a href="#" class="product-text-title">Coffee Bean</a>
+                 <span>20$ <del>40$</del></span>
+                 <a href="#" class="product-cart-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height="1em"  width="1em"><path d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64l0 48-128 0 0-48zm-48 48l-64 0c-26.5 0-48 21.5-48 48L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-208c0-26.5-21.5-48-48-48l-64 0 0-48C336 50.1 285.9 0 224 0S112 50.1 112 112l0 48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"/></svg>
+                    Add To Cart
+                 </a>
+            </div>
+           </div>
+
+               <!-------box2-->
+               <div class="product-box">
+                <a href="#" class="product-box-img">
+                  <img src="images/p2.png" alt="product"/>
+                  <span>New</span>
+                </a>
+                <div class="product-box-text">
+                     <a href="#" class="product-text-title">Coffee Bean</a>
+                     <span>20$ <del>40$</del></span>
+                     <a href="#" class="product-cart-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height="1em"  width="1em"><path d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64l0 48-128 0 0-48zm-48 48l-64 0c-26.5 0-48 21.5-48 48L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-208c0-26.5-21.5-48-48-48l-64 0 0-48C336 50.1 285.9 0 224 0S112 50.1 112 112l0 48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"/></svg>
+                        Add To Cart
+                     </a>
+                </div>
+               </div>
+
+                   <!-------box3-->
+           <div class="product-box">
+            <a href="#" class="product-box-img">
+              <img src="images/p3.png" alt="product"/>
+              <span>New</span>
+            </a>
+            <div class="product-box-text">
+                 <a href="#" class="product-text-title">Coffee Bean</a>
+                 <span>20$ <del>40$</del></span>
+                 <a href="#" class="product-cart-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height="1em"  width="1em"><path d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64l0 48-128 0 0-48zm-48 48l-64 0c-26.5 0-48 21.5-48 48L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-208c0-26.5-21.5-48-48-48l-64 0 0-48C336 50.1 285.9 0 224 0S112 50.1 112 112l0 48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"/></svg>
+                    Add To Cart
+                 </a>
+            </div>
+           </div>  
+             <!-------box4-->
+           <div class="product-box">
+            <a href="#" class="product-box-img">
+              <img src="images/p4.png" alt="product"/>
+              <span>New</span>
+            </a>
+            <div class="product-box-text">
+                 <a href="#" class="product-text-title">Coffee Bean</a>
+                 <span>20$ <del>40$</del></span>
+                 <a href="#" class="product-cart-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height="1em"  width="1em"><path d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64l0 48-128 0 0-48zm-48 48l-64 0c-26.5 0-48 21.5-48 48L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-208c0-26.5-21.5-48-48-48l-64 0 0-48C336 50.1 285.9 0 224 0S112 50.1 112 112l0 48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"/></svg>
+                    Add To Cart
+                 </a>
+            </div>
+           </div> 
+              <!-------box5-->
+           <div class="product-box">
+            <a href="#" class="product-box-img">
+              <img src="images/p5.png" alt="product"/>
+              <span>New</span>
+            </a>
+            <div class="product-box-text">
+                 <a href="#" class="product-text-title">Coffee Bean</a>
+                 <span>20$ <del>40$</del></span>
+                 <a href="#" class="product-cart-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height="1em"  width="1em"><path d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64l0 48-128 0 0-48zm-48 48l-64 0c-26.5 0-48 21.5-48 48L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-208c0-26.5-21.5-48-48-48l-64 0 0-48C336 50.1 285.9 0 224 0S112 50.1 112 112l0 48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"/></svg>
+                    Add To Cart
+                 </a>
+            </div>
+           </div>  
+             <!-------box6-->
+           <div class="product-box">
+            <a href="#" class="product-box-img">
+              <img src="images/p6.png" alt="product"/>
+              <span>New</span>
+            </a>
+            <div class="product-box-text">
+                 <a href="#" class="product-text-title">Coffee Bean</a>
+                 <span>20$ <del>40$</del></span>
+                 <a href="#" class="product-cart-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height="1em"  width="1em"><path d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64l0 48-128 0 0-48zm-48 48l-64 0c-26.5 0-48 21.5-48 48L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-208c0-26.5-21.5-48-48-48l-64 0 0-48C336 50.1 285.9 0 224 0S112 50.1 112 112l0 48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"/></svg>
+                    Add To Cart
+                 </a>
+            </div>
+           </div>
+
+        </div>
+          <div class="popular-banner">
+            <div class="popular-banner-text">
+                <h3>Coffee Beans Collection</h3>
+                <a href="#">Shop Now</a>
+
+
+
+            </div>
+            <div class="popular-banner-img">
+                <img src="images/banner.png" alt="Banner"/>
+            </div>
+          </div>
+      </div>
+
+</section>
+
+
+<section id="shopping-banner">
+    <div class="shopping-banner-container">
+       <div class="shopping-banner-text">
+        <strong>Collection</strong>
+        <h3>Refined Coffee Beans</h3>
+        <p>Journey of Flavor: Each bean carries the whispers of its origin, from the rich soil to the hands that nurture it, crafting a story in every cup.</p>
+        <a href="#">Shop Now</a>
+       </div>
+<!----------img-->
+<div class="shopping-banner-img">
+    <img src="images/banner-img.png" alt="banner"/>
+</div>
+
+    </div>
+</section>
+
+     <!---------script-->
+     <script>
+        document.addEventListener('DOMContentLoaded', function(event){
+            // Animation for product boxes on scroll
+            const productBoxes = document.querySelectorAll('.product-box');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                    }
+                });
+            });
+            
+            productBoxes.forEach(box => {
+                box.style.opacity = '0';
+                observer.observe(box);
+            });
+
+            // Add to cart animation
+            const cartButtons = document.querySelectorAll('.product-cart-btn');
+            let cartCount = 0;
+            const cartCountDisplay = document.querySelector('.nav-cart span');
+            
+            cartButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Cart count animation
+                    cartCount++;
+                    cartCountDisplay.textContent = cartCount;
+                    cartCountDisplay.style.animation = 'popScale 0.3s ease';
+                    setTimeout(() => {
+                        cartCountDisplay.style.animation = '';
+                    }, 300);
+                    
+                    // Button animation
+                    this.style.animation = 'buttonPop 0.3s ease';
+                    setTimeout(() => {
+                        this.style.animation = '';
+                    }, 300);
+                });
+            });
+
+            // Existing functionality
+            document.addEventListener('click', function(event){
+                if(event.target.closest('.nav-search')){
+                    document.querySelector('.search-bar').classList.add('search-bar-active')
+                }
+                else if(event.target.closest('.search-cancel')){
+                    document.querySelector('.search-bar').classList.remove('search-bar-active');
+                }
+            });
+
+            document.addEventListener('click',function(event){
+                const formElement = document.querySelector('.form');
+                if(event.target.closest('.nav-user, .already-account')){
+                    formElement.classList.add('login-active');
+                    formElement.classList.remove('sign-up-active');
+                }
+                if(event.target.closest('.sign-up-btn')){
+                    formElement.classList.remove('login-active');
+                    formElement.classList.add('sign-up-active');
+                }
+                if(event.target.closest('.form-cancel')){
+                    formElement.classList.remove('login-active');
+                    formElement.classList.remove('sign-up-active');
+                }
+            });
+        });
+     </script>
+
+    <div class="scroll-top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </div>
+
+    <script>
+        // Add this to your existing script
+        document.addEventListener('DOMContentLoaded', function() {
+            // Scroll to top functionality
+            const scrollTop = document.querySelector('.scroll-top');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 200) {
+                    scrollTop.classList.add('active');
+                } else {
+                    scrollTop.classList.remove('active');
+                }
+            });
+
+            scrollTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Add loading animation to images
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.style.opacity = '0';
+                img.style.transition = 'opacity 0.5s ease';
+                img.addEventListener('load', () => {
+                    img.style.opacity = '1';
+                });
+            });
+
+            // Add ripple effect to buttons
+            const buttons = document.querySelectorAll('a[href="#"], button');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const x = e.clientX - e.target.offsetLeft;
+                    const y = e.clientY - e.target.offsetTop;
+                    
+                    const ripple = document.createElement('span');
+                    ripple.style.left = `${x}px`;
+                    ripple.style.top = `${y}px`;
+                    
+                    this.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+        });
+    </script>
+
+    <div class="cart-preview">
+        <div class="cart-preview-header">
+            <h3>Shopping Cart</h3>
+            <button class="close-cart">×</button>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be added here dynamically -->
+        </div>
+        <div class="cart-preview-footer">
+            <div class="cart-total">Total: $<span>0</span></div>
+            <button class="checkout-btn">Checkout</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartPreview = document.querySelector('.cart-preview');
+            const cartItems = document.querySelector('.cart-items');
+            const cartTotal = document.querySelector('.cart-total span');
+            const cartCount = document.querySelector('.nav-cart span');
+            const closeCart = document.querySelector('.close-cart');
+            let total = 0;
+
+            // Show cart on cart icon click
+            document.querySelector('.nav-cart').addEventListener('click', function(e) {
+                e.preventDefault();
+                cartPreview.classList.add('active');
+            });
+
+            // Close cart
+            closeCart.addEventListener('click', () => {
+                cartPreview.classList.remove('active');
+            });
+
+            // Add to cart functionality
+            document.querySelectorAll('.product-cart-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const productBox = this.closest('.product-box');
+                    const productImg = productBox.querySelector('img').src;
+                    const productTitle = productBox.querySelector('.product-text-title').textContent;
+                    const productPrice = parseFloat(productBox.querySelector('.product-box-text span').textContent.replace('$', ''));
+                    
+                    // Create cart item
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <img src="${productImg}" alt="${productTitle}">
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">${productTitle}</div>
+                            <div class="cart-item-price">$${productPrice}</div>
+                        </div>
+                        <div class="cart-item-remove">×</div>
+                    `;
+
+                    // Add to cart
+                    cartItems.appendChild(cartItem);
+                    
+                    // Update total
+                    total += productPrice;
+                    cartTotal.textContent = total.toFixed(2);
+                    
+                    // Update cart count
+                    cartCount.textContent = cartItems.children.length;
+                    cartCount.style.animation = 'popScale 0.3s ease';
+                    setTimeout(() => cartCount.style.animation = '', 300);
+
+                    // Show cart
+                    cartPreview.classList.add('active');
+
+                    // Remove item functionality
+                    cartItem.querySelector('.cart-item-remove').addEventListener('click', function() {
+                        cartItem.style.animation = 'fadeOut 0.3s ease forwards';
+                        setTimeout(() => {
+                            cartItem.remove();
+                            total -= productPrice;
+                            cartTotal.textContent = total.toFixed(2);
+                            cartCount.textContent = cartItems.children.length;
+                        }, 300);
+                    });
+                });
+            });
+
+            // Close cart when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!cartPreview.contains(e.target) && 
+                    !e.target.closest('.nav-cart') && 
+                    !e.target.closest('.product-cart-btn')) {
+                    cartPreview.classList.remove('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
